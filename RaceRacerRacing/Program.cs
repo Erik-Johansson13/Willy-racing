@@ -107,6 +107,7 @@ class Program
                     for (int i = 0; i < vehicles.Count; i++)
                     {
                         Console.Write($"{i + 1}. Name: {vehicles[i].Name}.");
+                        // Shifting stats to make easier to read
                         for (int j = 1; j < 22 - vehicles[i].Name.Length; j++)
                         {
                             Console.Write(" ");
@@ -131,7 +132,8 @@ class Program
                         {
                             Console.Write(" ");
                         }
-
+                        Console.WriteLine();
+                        Console.WriteLine($" | Description: {vehicles[i].Description} | Ability - {vehicles[i].AbilityName}: {vehicles[i].AbilityDescription}");
                         Console.WriteLine();
                     }
                     Console.WriteLine("");
@@ -144,8 +146,10 @@ class Program
                 // Pusher customization
                 else if (choice == 2)
                 {
+                    // Creating list of choices
                     for (int i = 0; i < pushers.Count; i++)
                     {
+                        // Shifting stats to make easier to read
                         Console.Write($"{i + 1}. Name: {pushers[i].PusherName}.");
                         for (int j = 1; j < 16 - pushers[i].PusherName.Length; j++)
                         {
@@ -171,7 +175,8 @@ class Program
                         {
                             Console.Write(" ");
                         }
-                        Console.Write($" | Description: {pushers[i].PusherDescription}");
+                        Console.WriteLine();
+                        Console.WriteLine($" | Description: {pushers[i].PusherDescription} | Ability - {pushers[i].PusherAbilityName}: {pushers[i].PusherAbilityDescription} ");
                         Console.WriteLine();
                     }
                     Console.WriteLine("");
@@ -185,8 +190,10 @@ class Program
                 // Shoes customization
                 else if (choice == 3)
                 {
+                    // Creating list of choices
                     for (int i = 0; i < shoes.Count; i++)
                     {
+                        // Shifting stats to make easier to read
                         Console.Write($"{i + 1}. Name: {shoes[i].Name}.");
                         for (int j = 1; j < 16 - shoes[i].Name.Length; j++)
                         {
@@ -207,7 +214,7 @@ class Program
                         {
                             Console.Write(" ");
                         }
-
+                        Console.WriteLine();
                         Console.WriteLine();
                     }
                     Console.WriteLine("");
@@ -221,8 +228,10 @@ class Program
                 // Clothing customization
                 else if (choice == 4)
                 {
+                    // Creating list of choices
                     for (int i = 0; i < clothing.Count; i++)
                     {
+                        // Shifting stats to make easier to read
                         Console.Write($"{i + 1}. Name: {clothing[i].Name}.");
                         for(int j = 1; j < 15 - clothing[i].Name.Length; j++)
                         {
@@ -248,7 +257,7 @@ class Program
                         {
                             Console.Write(" ");
                         }
-
+                        Console.WriteLine();
                         Console.WriteLine();
                     }
                     Console.WriteLine("");
@@ -336,10 +345,13 @@ class Program
             // Pause before race with info printing
             Console.WriteLine("The race is about to start");
             Console.WriteLine("The racers are:");
-            for (int i = 0; i < bots.Count; i++)
+            for (int i = 0; i < bots.Count - 1; i++)
             {
                 Console.WriteLine($"Name: {bots[i].Name}. Set-up: {bots[i].PlayerVehicle.Name}, {bots[i].PlayerPusher.PusherName}, {bots[i].PlayerShoes.Name}, {bots[i].PlayerClothing.Name}");
             }
+            Console.WriteLine("<---------------->");
+            Console.WriteLine($"You: {player.Name}. Set-up: {player.PlayerVehicle.Name}, {player.PlayerPusher.PusherName}, {player.PlayerShoes.Name}, {player.PlayerClothing.Name}");
+            Console.WriteLine(""); 
             Console.WriteLine("PRESS ANY KEY TO CONTINUE");
             Console.ReadKey();
             Console.Clear();
@@ -398,11 +410,26 @@ class Program
                 PlacingsSort(placings);
                 for (int i = 0; i < placings.Count; i++) 
                 {
-                    Console.WriteLine($"{i+1}: {placings[i].Name}, Distance: {Math.Round(placings[i].Distance*10)/10} Meters. Speed:{Math.Round(placings[i].Speed*10)/10}");
+                    if (placings[i].Name != player.Name)
+                    {
+                        Console.WriteLine($"{i+1}: {placings[i].Name}, Distance: {Math.Round(placings[i].Distance*10)/10} Meters. Speed:{Math.Round(placings[i].Speed*10)/10}");
+                    }
+                    else
+                    {
+                        Console.WriteLine($"{i + 1}: {placings[i].Name}, Distance: {Math.Round(placings[i].Distance * 10) / 10} Meters. Speed:{Math.Round(placings[i].Speed * 10) / 10} <-- You");
+                    }
+                    // Checking if race is completed
                     if (placings[i].Distance >= player.SelectMap.TotalLength)
                     {
                         Console.Clear();
-                        Console.WriteLine($"{placings[i].Name} has won the race");
+                        if (placings[i].Name == player.Name)
+                        {
+                            Console.WriteLine("You win!");
+                        }
+                        else
+                        {
+                            Console.WriteLine($"{placings[i].Name} has won the race");
+                        }
                         Thread.Sleep(2000);
                         Console.WriteLine("");
                         Console.WriteLine("Play again?");
@@ -512,17 +539,12 @@ class Program
                 // Checking if players have collided
                 for(int i = 0; i < player.SelectMap.TilesAmount; i++)
                 {
-                    for(int j = 0; j < player.SelectMap.Placements[i].Count; j++)
-                    {
-                        Console.WriteLine($"{player.SelectMap.Placements[i][j].Name}");
-                    }
                     if (player.SelectMap.Placements[i].Count > 1)
                     {
                         for (int j = 0; j < player.SelectMap.Placements[i].Count - 1; j++)
                         {
                             Player person1 = player.SelectMap.Placements[i][j];
                             Player person2 = player.SelectMap.Placements[i][j+1];
-                            Console.WriteLine($"P1:{person1.Name}, P2:{person2.Name}");
                             if (-1 == rand.Next(-2, Convert.ToInt32(person2.Defence * 20 / person1.Strength)) && !person1.HasCollided)
                             {
                                 person1.HasCollided = true;

@@ -7,6 +7,7 @@ class Petar : Pusher
         PusherName = "Petar";
         PusherDescription = "Petar knows how to design in Inventor proffesional";
         PusherAbilityName = "Inventor Pro";
+        PusherAbilityDescription = "Start designing in inventor proffesional, leading to unparalleled levels of style";
         PusherSpeedBoost = 7;
         PusherAccelerationBoost = 0.8;
         PusherStrengthBoost = 6;

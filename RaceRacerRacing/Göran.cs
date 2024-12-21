@@ -6,6 +6,7 @@
         PusherName = "Göran";
         PusherDescription = "Göran is ugly, but he is good at running";
         PusherAbilityName = "Double run";
+        PusherAbilityDescription = "Start running while you are running, run twice once";
         PusherSpeedBoost = 10;
         PusherAccelerationBoost = 1;
         PusherStrengthBoost = 4;

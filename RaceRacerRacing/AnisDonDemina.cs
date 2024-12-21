@@ -7,6 +7,7 @@ class AnisDonDemina : Pusher
         PusherName = "Anis Don Demina";
         PusherDescription = "Sh sh sh shurrrrda";
         PusherAbilityName = "Shurrrrrda";
+        PusherAbilityDescription = "Become the real Shurda of legend, becoming an unstoppable force";
         PusherSpeedBoost = 5;
         PusherAccelerationBoost = 0.6;
         PusherStrengthBoost = 10;

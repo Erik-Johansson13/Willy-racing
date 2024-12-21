@@ -3,6 +3,7 @@
     public string? PusherName { get; protected set; }
     public string PusherDescription { get; protected set; }
     public string? PusherAbilityName { get; protected set; }
+    public string? PusherAbilityDescription { get; protected set; }
     public double PusherSpeedBoost { get; protected set; }
     public double PusherAccelerationBoost { get; protected set; }
     public int PusherStrengthBoost { get; protected set; }
